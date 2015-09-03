@@ -10,6 +10,22 @@
   <li><%= tag.name %></li>
   <% end %>
 </ul>
+<h3> Comments </h3>
+<%= @post.comments.each do |comment| %>
+<%= comment.content %>
+<% end %>
+ <!-- create a new item..defaults to create -->
+ <!-- tell is where to go -->
+ <!-- you need override the url... the default submission is not going where you want to go  -->
+  <%= form_for(@post)  do |f| %>
+  <!-- (@comment, url: post_comments_path(@post.id)) do |f| %> -->
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.submit "Create Comment"%>
+<% end %>
+
+<!-- form_for [@post, Comment.new] do .... and then hidden _field at the end... this would send the post id through
+in params by writing... f.hidden_field :post_id, :value => @post.id (this is for mass assignment purposes) -->
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
